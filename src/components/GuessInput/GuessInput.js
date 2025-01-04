@@ -1,11 +1,14 @@
 import React, { useState, useCallback } from "react";
 
-function GuessInput() {
+function GuessInput({ setRecords, records }) {
     const [value, setValue] = useState({ guess: "" });
 
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
         console.log(value);
+        const newArr = [...records];
+        newArr.push(value);
+        setRecords(newArr);
         setValue({ guess: "" });
     });
 
