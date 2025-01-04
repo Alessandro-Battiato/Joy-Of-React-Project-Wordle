@@ -20,36 +20,14 @@ function Game() {
     return (
         <>
             <div className="guess-results">
-                <GuessSlots
-                    guess={records[0]?.guess}
-                    correctGuess={answer}
-                    arr={records[0] ? records[0].guess.split("") : []}
-                />
-                <GuessSlots
-                    guess={records[1]?.guess}
-                    correctGuess={answer}
-                    arr={records[1] ? records[1].guess.split("") : []}
-                />
-                <GuessSlots
-                    guess={records[2]?.guess}
-                    correctGuess={answer}
-                    arr={records[2] ? records[2].guess.split("") : []}
-                />
-                <GuessSlots
-                    guess={records[3]?.guess}
-                    correctGuess={answer}
-                    arr={records[3] ? records[3].guess.split("") : []}
-                />
-                <GuessSlots
-                    guess={records[4]?.guess}
-                    correctGuess={answer}
-                    arr={records[4] ? records[4].guess.split("") : []}
-                />
-                <GuessSlots
-                    guess={records[5]?.guess}
-                    correctGuess={answer}
-                    arr={records[5] ? records[5].guess.split("") : []}
-                />
+                {Array.from({ length: NUM_OF_GUESSES_ALLOWED }, (_, index) => (
+                    <GuessSlots
+                        key={index}
+                        guess={records[index]?.guess}
+                        correctGuess={answer}
+                        arr={records[index]?.guess?.split("") || []}
+                    />
+                ))}
             </div>
 
             {hasWon && (

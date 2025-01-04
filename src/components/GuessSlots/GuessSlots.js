@@ -3,23 +3,19 @@ import { range } from "../../utils";
 import { checkGuess } from "../../game-helpers";
 
 function GuessSlots({ arr, guess, correctGuess }) {
+    const checkedGuess =
+        guess && correctGuess ? checkGuess(guess, correctGuess) : [];
+
     return (
         <p className="guess">
             {range(0, 5).map((_, i) => (
                 <span
-                    className={`cell ${
-                        guess && correctGuess
-                            ? checkGuess(guess, correctGuess)[i].status
-                            : ""
-                    }`}
-                    key={crypto.randomUUID()}
+                    className={`cell ${checkedGuess[i]?.status || ""}`}
+                    key={i}
                 >
                     {arr[i]}
                 </span>
             ))}
-            {/*Array.from({ length: 5 }, () => (
-                <span className="cell" key={crypto.randomUUID()}></span>
-            ))*/}
         </p>
     );
 }
