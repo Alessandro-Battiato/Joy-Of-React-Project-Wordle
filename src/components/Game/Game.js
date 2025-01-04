@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 import GuessInput from "../GuessInput";
 import GuessesRecords from "../GuessesRecords";
 import GuessSlots from "../GuessSlots/GuessSlots";
@@ -13,6 +14,8 @@ console.info({ answer });
 
 function Game() {
     const [records, setRecords] = useState([]);
+    const hasWon = records.find((el) => el.guess === answer);
+    const hasLost = records.length === NUM_OF_GUESSES_ALLOWED;
 
     return (
         <>
@@ -48,7 +51,27 @@ function Game() {
                     arr={records[5] ? records[5].guess.split("") : []}
                 />
             </div>
-            <GuessInput records={records} setRecords={setRecords} />
+
+            {hasWon && (
+                <div className="happy banner">
+                    <p>
+                        <strong>Congratulations!</strong> Got it in{" "}
+                        <strong>{records.length} guesses</strong>.
+                    </p>
+                </div>
+            )}
+
+            {hasLost && (
+                <div className="sad banner">
+                    <p>
+                        Sorry, the correct answer is <strong>{answer}</strong>.
+                    </p>
+                </div>
+            )}
+
+            {!hasWon && !hasLost && (
+                <GuessInput records={records} setRecords={setRecords} />
+            )}
         </>
     );
 }

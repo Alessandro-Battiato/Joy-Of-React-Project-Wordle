@@ -3,7 +3,6 @@ import { range } from "../../utils";
 import { checkGuess } from "../../game-helpers";
 
 function GuessSlots({ arr, guess, correctGuess }) {
-    console.log(guess, correctGuess);
     return (
         <p className="guess">
             {range(0, 5).map((_, i) => (
