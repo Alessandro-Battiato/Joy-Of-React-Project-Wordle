@@ -69,9 +69,11 @@ function Game() {
                 </div>
             )}
 
-            {!hasWon && !hasLost && (
-                <GuessInput records={records} setRecords={setRecords} />
-            )}
+            <GuessInput
+                disableInput={hasWon || hasLost}
+                records={records}
+                setRecords={setRecords}
+            />
         </>
     );
 }

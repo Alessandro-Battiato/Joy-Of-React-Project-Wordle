@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
-function GuessInput({ setRecords, records }) {
+function GuessInput({ setRecords, records, disableInput }) {
     const [value, setValue] = useState({ guess: "" });
 
     const handleSubmit = useCallback((e) => {
@@ -22,6 +22,7 @@ function GuessInput({ setRecords, records }) {
             <label htmlFor="guess-input">Enter guess:</label>
             <input
                 value={value.guess}
+                disabled={disableInput}
                 onChange={(e) =>
                     setValue({ guess: e.target.value.toUpperCase() })
                 }
