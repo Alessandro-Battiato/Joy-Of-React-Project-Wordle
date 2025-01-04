@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 function GuessInput({ setRecords, records }) {
     const [value, setValue] = useState({ guess: "" });
@@ -7,9 +8,13 @@ function GuessInput({ setRecords, records }) {
         e.preventDefault();
         console.log(value);
         const newArr = [...records];
-        newArr.push(value);
-        setRecords(newArr);
-        setValue({ guess: "" });
+        if (newArr.length !== NUM_OF_GUESSES_ALLOWED) {
+            newArr.push(value);
+            setRecords(newArr);
+            setValue({ guess: "" });
+        } else {
+            alert("troppi risultati fra");
+        }
     });
 
     return (
